@@ -11,3 +11,6 @@ __pycache__/
 .vercel/
 READ_ME_FIRST.md
 HANDOFF_*.md
+test chair/
+*.heic
+*.HEIC
