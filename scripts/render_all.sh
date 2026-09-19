@@ -12,4 +12,5 @@ for v in hero detail_back detail_arm high front back; do
   echo "START $v $(date +%H:%M:%S)"
   "$BLENDER" -b out/chair.blend -P scripts/render_chair.py -- "$v" "$PWD/$png" "$RES" "$SAMPLES" 2>&1 | grep -E "RENDERED|Traceback|Error" || echo "FAILED $v"
 done
+python scripts/strip_meta.py
 echo "ALL_DONE $(date +%H:%M:%S)"

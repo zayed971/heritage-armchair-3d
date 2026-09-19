@@ -43,6 +43,8 @@ try:
 except Exception:
     pass
 sc.render.image_settings.file_format = "PNG"
+for _f in ("date","time","render_time","frame","frame_range","memory","hostname","camera","lens","scene","marker","filename","sequencer_strip","note"):
+    if hasattr(sc.render, "use_stamp_" + _f): setattr(sc.render, "use_stamp_" + _f, False)  # no local paths/dates in output files
 sc.render.filepath = outp
 
 # world: studio HDRI, dimmed, as fill + reflections
