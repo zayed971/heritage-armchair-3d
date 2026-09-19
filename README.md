@@ -26,7 +26,7 @@ Eleven photos were not enough for photogrammetry (different rooms, different lig
 | Carved medallion, leaf bands, volutes | Real geometry — tubes, spirals and leaf shapes laid on the surface |
 | Pierced fretwork band | Four cells, each a ring between a rectangle and a shaped opening |
 | Upholstered back + seat | Domed cushion solids with real-world-scale UVs |
-| Gimp braid trim | A twisted two-ply cord plus ~300 scalloped loops, front and back |
+| Gimp braid trim | A twisted two-ply cord plus 264 scalloped loops, front and back |
 
 **The fabric is the real fabric.** `scripts/make_fabric.py` takes one phone close-up of the actual damask, removes the lighting gradient, cleans it, and mirrors it into a seamless tile — then derives a normal map and a roughness map from the same photo.
 
@@ -66,7 +66,7 @@ Serve `web/` with any static server (`python -m http.server`) to try the viewer 
 ## Repo layout
 
 ```
-scripts/   build_chair.py · render_chair.py · export_glb.py · make_fabric.py · make_wood.py · render_all.sh
+scripts/   build_chair.py · render_chair.py · export_glb.py · make_fabric.py · make_wood.py · render_all.sh · strip_meta.py
 tex/       wood, fabric and studio-lighting textures
 web/       index.html · chair.glb · img/   (this folder is what's deployed)
 out/final/ full-resolution studio renders
