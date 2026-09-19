@@ -1,0 +1,13 @@
+refs/
+out/*.glb
+out/*.blend
+out/prev_*
+out/web_test*
+out/arm_check.jpg
+out/contact.jpg
+.playwright-mcp/
+__pycache__/
+*.blend1
+.vercel/
+READ_ME_FIRST.md
+HANDOFF_*.md

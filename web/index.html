@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heritage Armchair — 3D Study</title>
+<meta name="description" content="A carved classical armchair rebuilt in 3D from reference photographs. Rotate it, zoom in, inspect the carving.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+<style>
+  :root { --bg:#14110f; --panel:#1c1815; --ink:#efe7db; --muted:#a3978a; --line:#35302a; --accent:#c49a62; }
+  * { box-sizing:border-box; margin:0; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:Inter,system-ui,sans-serif; font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2 { font-family:"Cormorant Garamond",Georgia,serif; font-weight:400; letter-spacing:.01em; }
+  .eyebrow { font-size:.72rem; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); }
+  header { display:flex; justify-content:space-between; align-items:center; padding:22px clamp(16px,4vw,56px); border-bottom:1px solid var(--line); }
+  header .mark { font-family:"Cormorant Garamond",serif; font-size:1.25rem; letter-spacing:.12em; }
+  header nav a { color:var(--muted); text-decoration:none; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; margin-left:24px; }
+  header nav a:hover { color:var(--ink); }
+  .hero { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); align-items:start; }
+  .stage { position:sticky; top:0; align-self:start; height:100vh; background:radial-gradient(ellipse at 50% 38%, #4a433c 0%, #2a2521 48%, #171412 100%); min-height:62vh; }
+  model-viewer { width:100%; height:100%; --poster-color:transparent; --progress-bar-color:var(--accent); }
+  .hint { position:absolute; left:50%; bottom:18px; transform:translateX(-50%); font-size:.7rem; letter-spacing:.2em; text-transform:uppercase; color:#cfc4b6; opacity:.75; pointer-events:none; white-space:nowrap; }
+  .views { position:absolute; top:16px; left:16px; display:flex; gap:8px; flex-wrap:wrap; }
+  .views button { background:rgba(20,17,15,.55); color:var(--ink); border:1px solid rgba(239,231,219,.22); padding:8px 14px; font:inherit; font-size:.7rem; letter-spacing:.16em; text-transform:uppercase; cursor:pointer; backdrop-filter:blur(6px); border-radius:2px; }
+  .views button:hover, .views button.on { border-color:var(--accent); color:var(--accent); }
+  .copy { padding:clamp(28px,5vw,72px); display:flex; flex-direction:column; justify-content:center; gap:22px; background:var(--panel); border-left:1px solid var(--line); }
+  .copy h1 { font-size:clamp(2.4rem,4.6vw,4rem); line-height:1.04; }
+  .copy h1 em { color:var(--accent); font-style:italic; }
+  .copy p { color:var(--muted); max-width:46ch; }
+  dl { display:grid; grid-template-columns:auto 1fr; gap:10px 22px; font-size:.86rem; border-top:1px solid var(--line); padding-top:22px; }
+  dt { color:var(--muted); letter-spacing:.08em; text-transform:uppercase; font-size:.7rem; padding-top:3px; }
+  section { padding:clamp(48px,8vw,110px) clamp(16px,4vw,56px); }
+  section > .head { max-width:720px; margin-bottom:40px; }
+  section h2 { font-size:clamp(1.9rem,3.4vw,2.9rem); margin-top:10px; }
+  section .head p { color:var(--muted); margin-top:12px; }
+  .grid { display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }
+  figure { position:relative; overflow:hidden; background:#221e1a; }
+  figure img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 1.2s cubic-bezier(.2,.7,.2,1); }
+  figure:hover img { transform:scale(1.035); }
+  figcaption { position:absolute; left:14px; bottom:12px; font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:#efe7db; text-shadow:0 1px 8px rgba(0,0,0,.6); }
+  .g1 { grid-column:span 7; aspect-ratio:4/5; } .g2 { grid-column:span 5; aspect-ratio:4/5; }
+  .g3,.g4,.g5,.g6 { grid-column:span 3; aspect-ratio:4/5; }
+  .process { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .process div { background:var(--bg); padding:30px; }
+  .process b { font-family:"Cormorant Garamond",serif; font-size:2rem; font-weight:400; color:var(--accent); display:block; }
+  .process h3 { font-weight:400; font-size:1rem; margin:8px 0 6px; }
+  .process p { color:var(--muted); font-size:.88rem; }
+  footer { padding:28px clamp(16px,4vw,56px); border-top:1px solid var(--line); color:var(--muted); font-size:.75rem; letter-spacing:.06em; }
+  @media (max-width:900px) {
+    .hero { grid-template-columns:1fr; } .stage { position:relative; height:72vh; min-height:480px; } .copy { border-left:0; border-top:1px solid var(--line); }
+    .g1,.g2 { grid-column:span 12; } .g3,.g4,.g5,.g6 { grid-column:span 6; } .process { grid-template-columns:1fr; }
+    header nav a:first-child { margin-left:0; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="mark">ATELIER · 3D</div>
+  <nav><a href="#details">Details</a><a href="#process">Process</a><a href="https://github.com/zayed971/heritage-armchair-3d" target="_blank" rel="noopener">GitHub</a></nav>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="stage">
+      <model-viewer id="mv" src="chair.glb" alt="Carved classical armchair with damask upholstery, interactive 3D model"
+        camera-controls touch-action="pan-y" auto-rotate auto-rotate-delay="1200" rotation-per-second="14deg"
+        interaction-prompt="none" environment-image="neutral" tone-mapping="agx" exposure="1.15"
+        shadow-intensity="1.3" shadow-softness="0.85"
+        camera-orbit="32deg 76deg 3.5m" camera-target="0m 0.54m 0m" field-of-view="30deg"
+        min-camera-orbit="auto 20deg 0.7m" max-camera-orbit="auto 100deg 5.5m" min-field-of-view="10deg" max-field-of-view="45deg"
+        ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" loading="eager"></model-viewer>
+      <div class="views">
+        <button data-orbit="32deg 76deg 3.5m" data-target="0m 0.54m 0m" class="on">Three-quarter</button>
+        <button data-orbit="0deg 82deg 3.5m" data-target="0m 0.54m 0m">Front</button>
+        <button data-orbit="90deg 84deg 3.5m" data-target="0m 0.54m 0m">Profile</button>
+        <button data-orbit="158deg 78deg 3.5m" data-target="0m 0.54m 0m">Back</button>
+        <button data-orbit="14deg 84deg 1.35m" data-target="0m 0.94m -0.36m">Carving</button>
+      </div>
+      <div class="hint">Drag to rotate · pinch or scroll to zoom</div>
+    </div>
+    <div class="copy">
+      <span class="eyebrow">Personal test · my own chair · phone photos only</span>
+      <h1>The heritage armchair, <em>rebuilt in three dimensions.</em></h1>
+      <p>This is an experiment. The chair is mine — an old carved armchair at home — and all I gave it was eleven ordinary phone photographs. No scanner, no studio, no measurements. What came out is a complete 3D model — every scroll, the pierced fretwork, the carved medallion, the looped gimp trim, and the original damask, woven back from a close-up of the fabric itself.</p>
+      <dl>
+        <dt>Frame</dt><dd>Stained hardwood, high-build lacquer, antique glaze in the carving</dd>
+        <dt>Upholstery</dt><dd>Cream &amp; gold jacquard damask, scalloped gimp braid front and back</dd>
+        <dt>Size</dt><dd>W 65 · D 76 · H 112 cm — seat height 50 cm (estimated from photographs)</dd>
+        <dt>Model</dt><dd>158k triangles · 2 MB · runs in a phone browser</dd>
+      </dl>
+    </div>
+  </div>
+
+  <section id="details">
+    <div class="head">
+      <span class="eyebrow">Studio renders</span>
+      <h2>Light does the selling.</h2>
+      <p>The live model above is for turning and inspecting. These stills are path-traced — real light bouncing through lacquer and cloth — for the moments a photograph is what's needed.</p>
+    </div>
+    <div class="grid">
+      <figure class="g1"><img src="img/hero.jpg" alt="Three-quarter studio render of the armchair" loading="lazy"><figcaption>Three-quarter</figcaption></figure>
+      <figure class="g2"><img src="img/detail_back.jpg" alt="Close-up of the carved medallion, fretwork and damask" loading="lazy"><figcaption>Medallion &amp; fretwork</figcaption></figure>
+      <figure class="g3"><img src="img/detail_arm.jpg" alt="Close-up of the scrolled arm" loading="lazy"><figcaption>Scrolled arm</figcaption></figure>
+      <figure class="g6"><img src="img/high.jpg" alt="View from above showing the seat and arms" loading="lazy"><figcaption>From above</figcaption></figure>
+      <figure class="g4"><img src="img/front.jpg" alt="Front view" loading="lazy"><figcaption>Front</figcaption></figure>
+      <figure class="g5"><img src="img/back.jpg" alt="Back view" loading="lazy"><figcaption>Back</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="head">
+      <span class="eyebrow">How it was made</span>
+      <h2>From a hallway snapshot to a product asset.</h2>
+    </div>
+    <div class="process">
+      <div><b>01</b><h3>Read the photographs</h3><p>Proportions, joinery and every carved element are measured off ordinary phone pictures — no scanner, no studio visit.</p></div>
+      <div><b>02</b><h3>Model it as it was built</h3><p>Turned legs are turned, rails are swept, the fretwork is pierced. The fabric is reconstructed from a close-up of the real weave.</p></div>
+      <div><b>03</b><h3>One model, every use</h3><p>The same file drives the interactive viewer, the studio stills, and augmented reality in a customer's own room.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer>A personal test project — my own chair, ordinary phone photos, modelled and rendered in Blender. Source on <a href="https://github.com/zayed971/heritage-armchair-3d" style="color:inherit">GitHub</a>.</footer>
+
+<script>
+  const mv = document.getElementById('mv');
+  const btns = document.querySelectorAll('.views button');
+  btns.forEach(b => b.addEventListener('click', () => {
+    btns.forEach(x => x.classList.remove('on')); b.classList.add('on');
+    mv.autoRotate = false;
+    mv.cameraTarget = b.dataset.target; mv.cameraOrbit = b.dataset.orbit;
+  }));
+  mv.addEventListener('camera-change', e => { if (e.detail.source === 'user-interaction') document.querySelector('.hint').style.opacity = 0; });
+</script>
+</body>
+</html>
